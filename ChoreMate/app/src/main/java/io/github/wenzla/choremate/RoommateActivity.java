@@ -1,5 +1,7 @@
 package io.github.wenzla.choremate;
 
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -10,8 +12,14 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.EditText;
 
 public class RoommateActivity extends AppCompatActivity {
+
+    public static final String MY_PREFS_NAME = "Names";
+    private EditText roomies;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,5 +51,11 @@ public class RoommateActivity extends AppCompatActivity {
 
         return super.onOptionsItemSelected(item);
     }
+
+
+   
+
+
+
 
 }

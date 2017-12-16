@@ -151,11 +151,12 @@ public class MainActivity extends AppCompatActivity {
 
         SharedPreferences.Editor editor = getApplicationContext().getSharedPreferences(MY_PREFS_NAME, MODE_PRIVATE).edit();
 
-        EditText txtname = (EditText)findViewById(R.id.editText);
+        EditText txtname = (EditText)findViewById(R.id.editText7);
         String name =  txtname.getText().toString();
 
         button = Integer.parseInt(name);
         editor.putInt("roomnum", button);
+        editor.apply();
 
         Intent i = new Intent(MainActivity.this, RoommateActivity.class);
         startActivity(i);
