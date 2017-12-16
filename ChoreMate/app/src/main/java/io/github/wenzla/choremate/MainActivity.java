@@ -156,6 +156,9 @@ public class MainActivity extends AppCompatActivity {
 
         button = Integer.parseInt(name);
         editor.putInt("roomnum", button);
+
+        Intent i = new Intent(MainActivity.this, RoommateActivity.class);
+        startActivity(i);
     }
 
 

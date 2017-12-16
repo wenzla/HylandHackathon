@@ -68,9 +68,9 @@
         android:id="@+id/button2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="36dp"
-        android:layout_marginTop="12dp"
-        android:text="Next Screen"
+        android:layout_marginEnd="56dp"
+        android:layout_marginTop="68dp"
+        android:text="Okay"
         app:layout_constraintEnd_toStartOf="@+id/vertical_center_guideline"
         app:layout_constraintTop_toTopOf="@+id/horizontal_center_guideline" />
 
@@ -85,5 +85,23 @@
         app:layout_constraintBottom_toTopOf="@+id/horizontal_button_top_guideline"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Enter Number of Roomates"
+        android:textAppearance="@android:style/TextAppearance.Material.Large"
+        tools:layout_editor_absoluteX="58dp"
+        tools:layout_editor_absoluteY="77dp" />
+
+    <EditText
+        android:id="@+id/editText6"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="number"
+        tools:layout_editor_absoluteX="85dp"
+        tools:layout_editor_absoluteY="121dp" />
 
 </android.support.constraint.ConstraintLayout>
