@@ -1,15 +1,39 @@
 package io.github.wenzla.choremate;
 
+import android.content.Context;
+import android.content.Intent;
+import android.content.SharedPreferences;
+import android.location.LocationManager;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.TextView;
+
+import com.facebook.AccessToken;
+import com.facebook.CallbackManager;
+import com.facebook.FacebookCallback;
+import com.facebook.FacebookException;
+import com.facebook.GraphRequest;
+import com.facebook.GraphResponse;
+import com.facebook.HttpMethod;
+import com.facebook.login.LoginResult;
+import com.facebook.login.widget.LoginButton;
+
+import org.json.JSONException;
 
 public class MainActivity extends AppCompatActivity {
+
+    public static final String MY_PREFS_NAME = "Roomates";
+    private EditText numroom;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -18,17 +42,79 @@ public class MainActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
+        Button nextScreen = (Button) findViewById(R.id.button2);
+        nextScreen.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+                Intent i = new Intent(MainActivity.this, RoommateActivity.class);
+                startActivity(i);
             }
         });
-    }
 
-    @Override
+        CallbackManager callbackManager = CallbackManager.Factory.create();
+        LoginButton loginButton = findViewById(R.id.login_button);
+        loginButton.registerCallback(callbackManager, new FacebookCallback<LoginResult>() {
+            @Override
+            public void onSuccess(LoginResult loginResult) {
+                String userID = loginResult.getAccessToken().getUserId();
+                /* make the API call */
+                new GraphRequest(
+                        AccessToken.getCurrentAccessToken(),
+                        "/" + userID,
+                        null,
+                        HttpMethod.GET,
+                        new GraphRequest.Callback() {
+                            public void onCompleted(GraphResponse response) {
+                                if (response != null && response.getJSONObject() != null && response.getJSONObject().has("name")) {
+                                    try {
+                                        String s = (response.getJSONObject().getString("name"));
+                                        setFBName(s);
+                                    } catch (JSONException e) {
+                                        Log.d("FB", "Could not contact Facebook server");
+                                    }
+                                }
+                            }
+
+                        }
+                ).executeAsync();
+            }
+
+            @Override
+            public void onCancel() {
+
+            }
+
+            @Override
+            public void onError(FacebookException error) {
+
+            }
+        });
+
+        if(isLoggedIn()){
+            String UserID = AccessToken.getCurrentAccessToken().getUserId();
+            new GraphRequest(
+                    AccessToken.getCurrentAccessToken(),
+                    "/"+UserID,
+                    null,
+                    HttpMethod.GET,
+                    new GraphRequest.Callback() {
+                        public void onCompleted(GraphResponse response) {
+                            if (response != null && response.getJSONObject() != null && response.getJSONObject().has("name"))
+                            {
+                                try {
+                                    String s = (response.getJSONObject().getString("name"));
+                                    setFBName(s);
+                                } catch (JSONException e) {
+                                    Log.d("FB", "Could not contact Facebook server");
+                                }
+                            }
+                        }
+
+                    }
+            ).executeAsync();
+        }
+    }
+            @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_main, menu);
@@ -49,4 +135,32 @@ public class MainActivity extends AppCompatActivity {
 
         return super.onOptionsItemSelected(item);
     }
+
+    public void setFBName(String name) {
+        Button b = (Button) findViewById(R.id.button2);
+        b.setText(name);
+    }
+
+    public boolean isLoggedIn() {
+        AccessToken accessToken = AccessToken.getCurrentAccessToken();
+        return accessToken != null;
+    }
+    public void firstbutton(View v){
+
+        int button = 2;
+
+        SharedPreferences.Editor editor = getApplicationContext().getSharedPreferences(MY_PREFS_NAME, MODE_PRIVATE).edit();
+
+        EditText txtname = (EditText)findViewById(R.id.editText7);
+        String name =  txtname.getText().toString();
+
+        button = Integer.parseInt(name);
+        editor.putInt("roomnum", button);
+        editor.apply();
+
+        Intent i = new Intent(MainActivity.this, RoommateActivity.class);
+        startActivity(i);
+    }
+
+
 }
