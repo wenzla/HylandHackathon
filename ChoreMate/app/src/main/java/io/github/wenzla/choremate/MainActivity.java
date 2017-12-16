@@ -2,6 +2,7 @@ package io.github.wenzla.choremate;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.location.LocationManager;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -13,6 +14,7 @@ import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 
 import com.facebook.AccessToken;
@@ -28,6 +30,10 @@ import com.facebook.login.widget.LoginButton;
 import org.json.JSONException;
 
 public class MainActivity extends AppCompatActivity {
+
+    public static final String MY_PREFS_NAME = "Roomates";
+    private EditText numroom;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -139,4 +145,21 @@ public class MainActivity extends AppCompatActivity {
         AccessToken accessToken = AccessToken.getCurrentAccessToken();
         return accessToken != null;
     }
+    public void firstbutton(View v){
+
+        int button = 2;
+
+        SharedPreferences.Editor editor = getApplicationContext().getSharedPreferences(MY_PREFS_NAME, MODE_PRIVATE).edit();
+
+        EditText txtname = (EditText)findViewById(R.id.editText);
+        String name =  txtname.getText().toString();
+
+        button = Integer.parseInt(name);
+        editor.putInt("roomnum", button);
+
+        Intent i = new Intent(MainActivity.this, RoommateActivity.class);
+        startActivity(i);
+    }
+
+
 }
