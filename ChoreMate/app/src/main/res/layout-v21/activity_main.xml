@@ -90,50 +90,20 @@
 
     <TextView
         android:id="@+id/textView2"
-<<<<<<< HEAD
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="64dp"
-        android:text="Number of Roomates"
-        android:textAppearance="@style/TextAppearance.AppCompat.Display1"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.479"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-=======
-        android:layout_width="253dp"
-        android:layout_height="89dp"
+        android:layout_height="39dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:text="Enter Number of Roomates"
-        android:textAppearance="@style/TextAppearance.AppCompat.Display1"
+        android:textAppearance="@android:style/TextAppearance.Material.Large"
         app:layout_constraintBottom_toTopOf="@+id/editText6"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.504"
         app:layout_constraintStart_toStartOf="parent" />
->>>>>>> a9afa2054dcb0222aba0c3a76e1c1200c1063d85
 
     <EditText
-        android:id="@+id/editText7"
+        android:id="@+id/editText6"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-<<<<<<< HEAD
-        android:layout_marginBottom="8dp"
-        android:layout_marginEnd="4dp"
-        android:layout_marginStart="4dp"
-        android:layout_marginTop="8dp"
-        android:ems="10"
-        android:inputType="number"
-        app:layout_constraintBottom_toTopOf="@+id/horizontal_center_guideline"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.925"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.516" />
-
-=======
         android:layout_marginBottom="108dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
@@ -143,6 +113,5 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.503"
         app:layout_constraintStart_toStartOf="parent" />
->>>>>>> a9afa2054dcb0222aba0c3a76e1c1200c1063d85
 
 </android.support.constraint.ConstraintLayout>
