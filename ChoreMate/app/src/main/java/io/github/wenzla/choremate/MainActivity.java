@@ -33,6 +33,7 @@ public class MainActivity extends AppCompatActivity {
 
     public static final String MY_PREFS_NAME = "Roomates";
     private EditText numroom;
+    CallbackManager callbackManager = CallbackManager.Factory.create();
 
 
     @Override
@@ -40,32 +41,42 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        final TextView tv = findViewById(R.id.textView);
         setSupportActionBar(toolbar);
 
         Button nextScreen = (Button) findViewById(R.id.button2);
         nextScreen.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view) {
+                int button = 2;
+
+                SharedPreferences.Editor editor = getApplicationContext().getSharedPreferences(MY_PREFS_NAME, MODE_PRIVATE).edit();
+
+                EditText txtname = (EditText)findViewById(R.id.editText);
+                String name =  txtname.getText().toString();
+
+                button = Integer.parseInt(name);
+                editor.putInt("roomnum", button);
+                editor.apply();
                 Intent i = new Intent(MainActivity.this, RoommateActivity.class);
                 startActivity(i);
             }
         });
 
-        CallbackManager callbackManager = CallbackManager.Factory.create();
         LoginButton loginButton = findViewById(R.id.login_button);
         loginButton.registerCallback(callbackManager, new FacebookCallback<LoginResult>() {
             @Override
             public void onSuccess(LoginResult loginResult) {
-                String userID = loginResult.getAccessToken().getUserId();
-                /* make the API call */
+                String UserID = AccessToken.getCurrentAccessToken().getUserId();
                 new GraphRequest(
                         AccessToken.getCurrentAccessToken(),
-                        "/" + userID,
+                        "/"+UserID,
                         null,
                         HttpMethod.GET,
                         new GraphRequest.Callback() {
                             public void onCompleted(GraphResponse response) {
-                                if (response != null && response.getJSONObject() != null && response.getJSONObject().has("name")) {
+                                if (response != null && response.getJSONObject() != null && response.getJSONObject().has("name"))
+                                {
                                     try {
                                         String s = (response.getJSONObject().getString("name"));
                                         setFBName(s);
@@ -85,11 +96,11 @@ public class MainActivity extends AppCompatActivity {
             }
 
             @Override
-            public void onError(FacebookException error) {
+            public void onError(FacebookException e) {
 
             }
-        });
 
+        });
         if(isLoggedIn()){
             String UserID = AccessToken.getCurrentAccessToken().getUserId();
             new GraphRequest(
@@ -113,8 +124,15 @@ public class MainActivity extends AppCompatActivity {
                     }
             ).executeAsync();
         }
+
     }
-            @Override
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        callbackManager.onActivityResult(requestCode, resultCode, data);
+    }
+
+    @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_main, menu);
@@ -137,28 +155,13 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void setFBName(String name) {
-        Button b = (Button) findViewById(R.id.button2);
+        TextView b = findViewById(R.id.textView);
         b.setText(name);
     }
 
     public boolean isLoggedIn() {
         AccessToken accessToken = AccessToken.getCurrentAccessToken();
         return accessToken != null;
-    }
-    public void firstbutton(View v){
-
-        int button = 2;
-
-        SharedPreferences.Editor editor = getApplicationContext().getSharedPreferences(MY_PREFS_NAME, MODE_PRIVATE).edit();
-
-        EditText txtname = (EditText)findViewById(R.id.editText);
-        String name =  txtname.getText().toString();
-
-        button = Integer.parseInt(name);
-        editor.putInt("roomnum", button);
-
-        Intent i = new Intent(MainActivity.this, RoommateActivity.class);
-        startActivity(i);
     }
 
 
