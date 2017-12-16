@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:id="@+id/homeScreen"
     android:layout_height="match_parent"
-    tools:context="io.github.wenzla.choremate.MainActivity">
+    tools:context="io.github.wenzla.choremate.RoommateActivity">
 
     <android.support.constraint.Guideline
         android:id="@+id/string_guideline"
@@ -63,28 +63,5 @@
             app:popupTheme="@style/AppTheme.PopupOverlay" />
 
     </android.support.design.widget.AppBarLayout>
-
-    <Button
-        android:id="@+id/button2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="36dp"
-        android:layout_marginTop="12dp"
-        android:text="Next Screen"
-        app:layout_constraintEnd_toStartOf="@+id/vertical_center_guideline"
-        app:layout_constraintTop_toTopOf="@+id/horizontal_center_guideline" />
-
-
-    <com.facebook.login.widget.LoginButton
-        android:id="@+id/login_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginBottom="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        app:layout_constraintBottom_toTopOf="@+id/horizontal_button_top_guideline"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
 
 </android.support.constraint.ConstraintLayout>
