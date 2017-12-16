@@ -11,14 +11,14 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        app:layout_constraintGuide_percent="0.27" />
+        app:layout_constraintGuide_begin="104dp" />
 
     <android.support.constraint.Guideline
         android:id="@+id/fb_guideline"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        app:layout_constraintGuide_percent="0.5" />
+        app:layout_constraintGuide_begin="192dp" />
 
     <android.support.constraint.Guideline
         android:id="@+id/horizontal_button_top_guideline"
@@ -58,7 +58,7 @@
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
-            android:background="?attr/colorPrimary"
+            android:background="@color/colorAccent"
             app:popupTheme="@style/AppTheme.PopupOverlay" />
 
     </android.support.design.widget.AppBarLayout>
@@ -68,9 +68,11 @@
         android:id="@+id/button2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="36dp"
-        android:layout_marginTop="12dp"
-        android:text="Next Screen"
+        android:layout_marginEnd="56dp"
+        android:layout_marginTop="20dp"
+        android:background="@color/colorAccent"
+        android:text="Next"
+        android:textColor="#000000"
         app:layout_constraintEnd_toStartOf="@+id/vertical_center_guideline"
         app:layout_constraintTop_toTopOf="@+id/horizontal_center_guideline" />
 
