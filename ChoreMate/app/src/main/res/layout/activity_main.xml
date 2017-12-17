@@ -72,7 +72,7 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="416dp"
         android:scaleType="centerCrop"
-        android:src="@drawable/ChoreMateAppBackground"
+        android:src="@drawable/choremateappbackground"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
@@ -131,5 +131,15 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.281"
         app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/textViewFb"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:text="Hello, Sign in to Continue"
+        app:layout_constraintStart_toStartOf="@+id/string_guideline"
+        app:layout_constraintTop_toBottomOf="@+id/login_button" />
 
 </android.support.constraint.ConstraintLayout>

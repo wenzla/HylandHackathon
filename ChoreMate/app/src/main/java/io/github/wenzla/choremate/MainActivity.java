@@ -155,8 +155,9 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void setFBName(String name) {
-        TextView b = findViewById(R.id.textView);
-        b.setText(name);
+        TextView b = findViewById(R.id.textViewFb);
+        String viewString = "Hello, " + name;
+        b.setText(viewString);
     }
 
     public boolean isLoggedIn() {
