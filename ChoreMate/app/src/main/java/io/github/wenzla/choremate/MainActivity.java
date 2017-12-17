@@ -16,6 +16,7 @@ import android.view.MenuItem;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.facebook.AccessToken;
 import com.facebook.CallbackManager;
@@ -49,17 +50,20 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 int button = 2;
-
-                SharedPreferences.Editor editor = getApplicationContext().getSharedPreferences(MY_PREFS_NAME, MODE_PRIVATE).edit();
-
                 EditText txtname = (EditText)findViewById(R.id.editText);
                 String name =  txtname.getText().toString();
 
-                button = Integer.parseInt(name);
-                editor.putInt("roomnum", button);
-                editor.apply();
-                Intent i = new Intent(MainActivity.this, RoommateActivity.class);
-                startActivity(i);
+                if (name.length() > 0 && name.length() < 2 && !name.equals("0")) {
+                    SharedPreferences.Editor editor = getApplicationContext().getSharedPreferences(MY_PREFS_NAME, MODE_PRIVATE).edit();
+                    button = Integer.parseInt(name);
+                    editor.putInt("roomnum", button);
+                    editor.apply();
+                    Intent i = new Intent(MainActivity.this, RoommateActivity.class);
+                    startActivity(i);
+                } else {
+                    Toast.makeText(MainActivity.this, "Please enter a number 1-9",
+                            Toast.LENGTH_LONG).show();
+                }
             }
         });
 
