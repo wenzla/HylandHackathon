@@ -31,7 +31,7 @@ import org.json.JSONException;
 
 public class MainActivity extends AppCompatActivity {
 
-    public static final String MY_PREFS_NAME = "Roomates";
+    public static final String MY_PREFS_NAME = "Roommates";
     private EditText numroom;
     CallbackManager callbackManager = CallbackManager.Factory.create();
 

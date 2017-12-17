@@ -12,6 +12,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 
 public class RoommateActivity extends AppCompatActivity {
@@ -20,13 +21,21 @@ public class RoommateActivity extends AppCompatActivity {
     private EditText roomies;
 
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_roommate);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+        Button nextScreen = (Button) findViewById(R.id.buttonRoom);
+        nextScreen.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(RoommateActivity.this, ChoresActivity.class);
+                startActivity(i);
+            }
+        });
 
     }
 
@@ -53,7 +62,7 @@ public class RoommateActivity extends AppCompatActivity {
     }
 
 
-   
+
 
 
 
